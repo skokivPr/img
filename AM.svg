@@ -1,0 +1,220 @@
+ <svg viewBox="0 0 1600 900" xmlns="http://www.w3.org/2000/svg" font-family="'Inter', sans-serif" style="user-select: none;">
+
+        <!-- Definicje stylów, fontów i filtrów -->
+        <defs>
+            <style>
+                @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700&amp;family=Orbitron:wght@400;700&amp;display=swap');
+
+                .font-orbitron {
+                    font-family: 'Orbitron', sans-serif;
+                }
+
+                .text-orange {
+                    fill: #F97316;
+                }
+
+                .text-gray {
+                    fill: #9CA3AF;
+                }
+
+                .text-dark {
+                    fill: #333;
+                }
+
+                .text-white {
+                    fill: #fff;
+                }
+
+                /* Animacje */
+                @keyframes spin {
+                    from {
+                        transform: rotate(0deg);
+                    }
+
+                    to {
+                        transform: rotate(360deg);
+                    }
+                }
+
+                .animate-spin {
+                    transform-origin: 800px 450px;
+                    animation: spin 20s linear infinite;
+                }
+            </style>
+
+            <!-- Wzór kropek (Dot Grid) -->
+            <pattern id="dotPattern" x="0" y="0" width="12" height="12" patternUnits="userSpaceOnUse">
+                <circle cx="2" cy="2" r="1.5" fill="#F97316"></circle>
+            </pattern>
+
+            <!-- Cień dla wewnętrznego koła -->
+            <filter id="shadow">
+                <feDropShadow dx="0" dy="0" stdDeviation="10" flood-color="black" flood-opacity="0.8"></feDropShadow>
+            </filter>
+
+            <!-- Kształt przycięcia dla zewnętrznego łuku (Outer Arc Clip) -->
+            <clipPath id="arcClip">
+                <polygon points="600,150 1000,150 1000,550 800,700 600,550"></polygon>
+            </clipPath>
+
+            <!-- Gradient dla radaru -->
+            <linearGradient id="radarGradient" x1="0%" y1="0%" x2="100%" y2="0%">
+                <stop offset="0%" stop-color="#F97316" stop-opacity="1"></stop>
+                <stop offset="100%" stop-color="#F97316" stop-opacity="0"></stop>
+            </linearGradient>
+        </defs>
+
+        <!-- TŁO -->
+        <rect width="1600" height="900" fill="#1a1a1a"></rect>
+
+        <!-- === GÓRNA SEKCJA === -->
+        <!-- Pomarańczowy pasek -->
+        <rect x="780" y="30" width="40" height="6" rx="3" fill="#F97316"></rect>
+
+        <!-- Tekst prawy góra -->
+        <g transform="translate(1560, 80)" text-anchor="end">
+            <text x="0" y="0" font-size="10" fill="#9CA3AF" width="160">
+                <tspan x="0" dy="0">THIS IS A RECREATION OF A</tspan>
+                <tspan x="0" dy="12">FUTURISTIC UI DESIGN. THE GOAL</tspan>
+                <tspan x="0" dy="12">IS TO CAPTURE THE AESTHETIC</tspan>
+            </text>
+            <line x1="-160" y1="20" x2="0" y2="20" stroke="#F97316" stroke-width="1"></line>
+            <text x="0" y="60" font-size="24" fill="#F97316" font-weight="bold">↓</text>
+        </g>
+
+        <!-- === ŚRODKOWA SEKCJA (GŁÓWNE KOŁO) === -->
+        <!-- Grupa wyśrodkowana (800, 450) -->
+
+        <!-- 1. Zewnętrzny łuk (Outer Arc) -->
+        <!-- Box 400x400, obrócony o -35 stopni wokół środka -->
+        <g transform="rotate(-35, 800, 450)">
+            <!-- Obrys przycięty clip-path - pełny okrąg -->
+            <circle cx="800" cy="450" r="200" fill="none" stroke="#F97316" stroke-width="5"></circle>
+
+            <!-- Kropki ozdobne na łuku (pozycje wyliczone z CSS) -->
+            <circle cx="610" cy="540" r="8" fill="#F97316" transform="rotate(35, 610, 540)"></circle>
+            <circle cx="990" cy="540" r="8" fill="#F97316" transform="rotate(35, 990, 540)"></circle>
+        </g>
+
+        <!-- 2. Wewnętrzne koło (Inner Circle) -->
+        <circle cx="800" cy="450" r="175" fill="#0a0a0a" filter="url(#shadow)"></circle>
+
+        <!-- 3. Radar Ring (Animowany) -->
+        <g class="animate-spin">
+            <!-- Symulacja stożka radaru za pomocą wycinka koła lub linii -->
+            <!-- Promień 75 (150px szerokości) -->
+            <circle cx="800" cy="450" r="75" fill="none"></circle>
+            <!-- "Wiązka" radaru -->
+            <path opacity="0.8" fill="url(#radarGradient)" d="M800,450 L800,375 A75,75 0 0,1 875,450 Z"></path>
+        </g>
+
+        <!-- 4. Centrum (Hub) -->
+        <circle cx="800" cy="450" r="60" fill="#F97316"></circle>
+        <circle cx="800" cy="450" r="5" fill="#0a0a0a"></circle>
+
+        <!-- 5. Tekst na okręgu "MODULAR DESIGN" -->
+        <defs>
+            <path id="textPath" d="M 700,350 A 150,150 0 0,1 900,350" />
+        </defs>
+        <text font-size="14" fill="#D1D5DB" letter-spacing="3">
+            <textPath href="#textPath" startOffset="50%" text-anchor="middle">
+                MODULAR DESIGN
+            </textPath>
+        </text>
+
+        <!-- 6. Pomarańczowy narożnik (Square rotate 45) -->
+        <g transform="translate(912, 610) rotate(10)">
+            <path d="M0 16 L16 16 L16 0" fill="none" stroke="#F97316" stroke-width="4"></path>
+        </g>
+
+        <!-- === LEWA SEKCJA === -->
+        <g transform="translate(200, 450)">
+            <!-- Lista numerów -->
+            <g transform="translate(0, -50)" font-size="14" fill="#9CA3AF">
+                <text x="0" y="0" fill="#9CA3AF" style="cursor: pointer;"
+                    onmouseover="this.setAttribute('fill', '#F97316')"
+                    onmouseout="this.setAttribute('fill', '#9CA3AF')">01</text>
+                <text x="0" y="20" fill="#9CA3AF" style="cursor: pointer;"
+                    onmouseover="this.setAttribute('fill', '#F97316')"
+                    onmouseout="this.setAttribute('fill', '#9CA3AF')">02</text>
+                <text x="0" y="40" fill="#9CA3AF" style="cursor: pointer;"
+                    onmouseover="this.setAttribute('fill', '#F97316')"
+                    onmouseout="this.setAttribute('fill', '#9CA3AF')">03</text>
+                <text x="0" y="60" fill="white" style="cursor: pointer;"
+                    onmouseover="this.setAttribute('fill', '#F97316')"
+                    onmouseout="this.setAttribute('fill', 'white')">04</text>
+                <text x="0" y="80" fill="#9CA3AF" style="cursor: pointer;"
+                    onmouseover="this.setAttribute('fill', '#F97316')"
+                    onmouseout="this.setAttribute('fill', '#9CA3AF')">05</text>
+            </g>
+
+            <!-- Pionowy tekst (obrócony -90deg dla czytelności "od dołu do góry" jak w CSS rotate(180) + vertical-rl) -->
+            <text x="-20" y="50" transform="rotate(-90)" font-family="'Orbitron', sans-serif" font-size="24"
+                letter-spacing="2" fill="white" text-anchor="middle">
+                AESTHETIC MISTAKES
+            </text>
+
+            <!-- Pasek pomarańczowy -->
+            <rect x="10" y="80" width="4" height="20" fill="#F97316"></rect>
+        </g>
+
+        <!-- Strzałka lewa -->
+        <text x="220" y="250" font-size="24" fill="#F97316" font-weight="bold"
+            transform="rotate(-45, 220, 250)">←</text>
+        <!-- Linia ukośna -->
+        <line x1="240" y1="580" x2="270" y2="580" stroke="white" stroke-width="1" transform="rotate(-45, 240, 580)">
+        </line>
+
+
+        <!-- === PRAWA SEKCJA === -->
+        <g transform="translate(1420, 400)">
+            <!-- Dot Grid -->
+            <rect x="0" y="0" width="72" height="72" fill="url(#dotPattern)"></rect>
+
+            <!-- Pionowy tekst -->
+            <text x="20" y="100" transform="rotate(90, 20, 100)" font-family="'Orbitron', sans-serif" font-size="24"
+                letter-spacing="2" fill="white">
+                CIRCLES AND ROUNDS
+            </text>
+
+            <!-- Duży numer 04 -->
+            <text x="6" y="490" font-family="'Orbitron', sans-serif" font-size="48" fill="#F97316"
+                text-anchor="middle">04</text>
+        </g>
+        <!-- Strzałka prawa -->
+        <text x="1440" y="660" font-size="24" fill="#F97316" font-weight="bold"
+            transform="rotate(45, 1440, 560)">↑</text>
+
+
+        <!-- === DOLNA SEKCJA === -->
+        <g transform="translate(800, 800)">
+            <!-- Biały pasek pionowy -->
+            <rect x="-3" y="-120" width="6" height="64" rx="3" fill="white"></rect>
+
+            <!-- Tekst Lorem Ipsum (lewa strona od środka) -->
+            <g transform="translate(-160, -40)">
+                <text x="0" y="0" font-size="10" fill="#9CA3AF" width="160" text-anchor="end">
+                    <tspan x="0" dy="0">Lorem ipsum dolor sit amet,</tspan>
+                    <tspan x="0" dy="12">consectetur adipiscing elit.</tspan>
+                    <tspan x="0" dy="12">Sed non risus.</tspan>
+                </text>
+                <!-- Strzałka obrócona -->
+                <text x="0" y="30" font-size="24" fill="#F97316" text-anchor="end"
+                    transform="scale(-1, 1) translate(0, 0)">➔</text>
+            </g>
+
+            <!-- A_M Design text -->
+            <g transform="translate(0, 0)" text-anchor="middle">
+                <text x="0" y="0" font-family="'Orbitron', sans-serif" font-size="30" font-weight="bold"
+                    letter-spacing="2" fill="#E0E0E0">A_M</text>
+                <text x="0" y="20" font-size="10" letter-spacing="3" fill="#E0E0E0">DESIGN AND PRODUCTION</text>
+            </g>
+
+            <!-- Szary pasek -->
+            <rect x="-64" y="40" width="128" height="6" rx="3" fill="#374151"></rect>
+
+            <!-- Nabla (trójkąt w dół) -->
+            <text x="0" y="75" font-size="24" fill="#F97316" text-anchor="middle">▼</text>
+        </g>
+
+    </svg>
